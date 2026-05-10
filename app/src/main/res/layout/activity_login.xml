@@ -11,6 +11,14 @@
         android:padding="32dp"
         android:gravity="center">
 
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/app_name" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,18 +36,21 @@
 
         <!-- Server selector -->
         <TextView
+            android:id="@+id/tvSelectServer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/select_server"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
 
         <RadioGroup
             android:id="@+id/rgServer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="24dp"
+            android:visibility="gone">
 
             <RadioButton
                 android:id="@+id/rbProduction"
