@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.foodsharing.app.data.model.PickupOption
-import com.foodsharing.app.databinding.ItemPickupOptionBinding
+import com.foodsharing.app.databinding.ItemRegisteredPickupBinding
 
-class PickupOptionsAdapter(
+class RegisteredPickupsAdapter(
     private val onLeaveClick: (PickupOption) -> Unit
-) : ListAdapter<PickupOption, PickupOptionsAdapter.ViewHolder>(DiffCallback()) {
+) : ListAdapter<PickupOption, RegisteredPickupsAdapter.ViewHolder>(DiffCallback()) {
 
-    inner class ViewHolder(private val binding: ItemPickupOptionBinding) :
+    inner class ViewHolder(private val binding: ItemRegisteredPickupBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(pickup: PickupOption) {
@@ -23,7 +23,7 @@ class PickupOptionsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemPickupOptionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemRegisteredPickupBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

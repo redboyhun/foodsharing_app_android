@@ -79,7 +79,8 @@ data class Basket(
     @Json(name = "weightInGrams") val weightInGrams: Int? = null,
     @Json(name = "requestCount") val requestCount: Int? = null,
     val creator: BasketCreator? = null,
-    val until: String? = null
+    val until: String? = null,
+    val distance: Double? = null
 )
 
 @JsonClass(generateAdapter = true)
