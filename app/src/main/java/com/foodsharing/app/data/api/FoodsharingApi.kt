@@ -8,7 +8,7 @@ interface FoodsharingApi {
 
     // Auth
     @POST("api/user/login")
-    suspend fun login(@Body request: LoginRequest): Response<CurrentUserResponse>
+    suspend fun login(@Body request: LoginRequest): Response<Unit>
 
     @DELETE("api/user/login")
     suspend fun logout(): Response<Unit>
