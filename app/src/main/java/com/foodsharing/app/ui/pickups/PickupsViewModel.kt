@@ -1,24 +1,26 @@
 package com.foodsharing.app.ui.pickups
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.foodsharing.app.data.model.PickupOption
-import com.foodsharing.app.data.model.RegisteredPickup
 import com.foodsharing.app.data.repository.PickupRepository
 import com.foodsharing.app.util.Resource
+import com.foodsharing.app.util.SessionManager
 import kotlinx.coroutines.launch
 
-class PickupsViewModel : ViewModel() {
+class PickupsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = PickupRepository()
+    private val sessionManager = SessionManager(application)
 
     private val _options = MutableLiveData<Resource<List<PickupOption>>>()
     val options: LiveData<Resource<List<PickupOption>>> = _options
 
-    private val _registered = MutableLiveData<Resource<List<RegisteredPickup>>>()
-    val registered: LiveData<Resource<List<RegisteredPickup>>> = _registered
+    private val _registered = MutableLiveData<Resource<List<PickupOption>>>()
+    val registered: LiveData<Resource<List<PickupOption>>> = _registered
 
     private val _joinState = MutableLiveData<Resource<Unit>>()
     val joinState: LiveData<Resource<Unit>> = _joinState
@@ -33,7 +35,7 @@ class PickupsViewModel : ViewModel() {
     fun loadRegisteredPickups() {
         viewModelScope.launch {
             _registered.value = Resource.Loading
-            _registered.value = repository.getRegisteredPickups()
+            _registered.value = repository.getRegisteredPickups(sessionManager.getUserId())
         }
     }
 

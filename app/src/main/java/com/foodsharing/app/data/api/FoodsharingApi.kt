@@ -15,7 +15,7 @@ interface FoodsharingApi {
 
     // Current user
     @GET("api/users/current/details")
-    suspend fun getCurrentUser(): Response<CurrentUserResponse>
+    suspend fun getCurrentUser(): Response<UserDetails>
 
     // Baskets
     @GET("api/baskets/nearby")
@@ -41,7 +41,7 @@ interface FoodsharingApi {
     @DELETE("api/baskets/{basketId}")
     suspend fun deleteBasket(@Path("basketId") basketId: Int): Response<Unit>
 
-    @POST("api/baskets/{basketId}/request")
+    @POST("api/baskets/{basketId}/requests")
     suspend fun requestBasket(
         @Path("basketId") basketId: Int,
         @Body message: OptionalMessage
@@ -64,23 +64,23 @@ interface FoodsharingApi {
     suspend fun sendMessage(
         @Path("id") id: Int,
         @Body message: SendMessageRequest
-    ): Response<ChatMessage>
+    ): Response<Message>
 
     @PUT("api/conversations/{id}/read-status")
     suspend fun markConversationRead(
         @Path("id") id: Int,
-        @Body status: ReadStatusRequest
+        @Query("isRead") isRead: Boolean
     ): Response<Unit>
 
     // Pickups
-    @GET("api/pickup/options")
+    @GET("api/users/current/pickups/options")
     suspend fun getPickupOptions(): Response<List<PickupOption>>
 
-    @GET("api/pickup/registered")
-    suspend fun getRegisteredPickups(): Response<List<RegisteredPickup>>
+    @GET("api/users/{userId}/pickups/registered")
+    suspend fun getRegisteredPickups(@Path("userId") userId: Int): Response<List<PickupOption>>
 
-    @GET("api/pickup/history")
-    suspend fun getPickupHistory(): Response<List<RegisteredPickup>>
+    @GET("api/users/{userId}/pickups/history")
+    suspend fun getPickupHistory(@Path("userId") userId: Int): Response<List<PickupOption>>
 
     @POST("api/stores/{storeId}/pickups/{pickupDate}/users/current")
     suspend fun joinPickup(
@@ -95,10 +95,6 @@ interface FoodsharingApi {
     ): Response<Unit>
 
     // Stores
-    @GET("api/user/current/stores")
-    suspend fun getUserStores(): Response<List<StoreInfo>>
-
-    // Profile
-    @GET("api/users/current/details")
-    suspend fun getUser(): Response<Profile>
+    @GET("api/users/{userId}/stores")
+    suspend fun getUserStores(@Path("userId") userId: Int): Response<List<StoreInfo>>
 }

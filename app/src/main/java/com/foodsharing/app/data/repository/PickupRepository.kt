@@ -20,9 +20,9 @@ class PickupRepository {
         }
     }
 
-    suspend fun getRegisteredPickups(): Resource<List<RegisteredPickup>> {
+    suspend fun getRegisteredPickups(userId: Int): Resource<List<PickupOption>> {
         return try {
-            val response = ApiClient.api.getRegisteredPickups()
+            val response = ApiClient.api.getRegisteredPickups(userId)
             if (response.isSuccessful && response.body() != null) {
                 Resource.Success(response.body()!!)
             } else {
@@ -59,9 +59,9 @@ class PickupRepository {
         }
     }
 
-    suspend fun getUserStores(): Resource<List<StoreInfo>> {
+    suspend fun getUserStores(userId: Int): Resource<List<StoreInfo>> {
         return try {
-            val response = ApiClient.api.getUserStores()
+            val response = ApiClient.api.getUserStores(userId)
             if (response.isSuccessful && response.body() != null) {
                 Resource.Success(response.body()!!)
             } else {

@@ -32,8 +32,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 if (userResult is Resource.Success) {
                     val user = userResult.data
                     sessionManager.saveUserId(user.id)
-                    sessionManager.saveUserName(user.name)
-                    sessionManager.saveUserAvatar(user.avatar)
+                    sessionManager.saveUserName(user.displayName)
+                    sessionManager.saveUserAvatar(user.photo)
                 }
             }
             _loginState.value = result

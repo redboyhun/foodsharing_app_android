@@ -33,7 +33,7 @@ class ConversationRepository {
         }
     }
 
-    suspend fun getMessages(conversationId: Int): Resource<List<ChatMessage>> {
+    suspend fun getMessages(conversationId: Int): Resource<List<Message>> {
         return try {
             val response = ApiClient.api.getMessages(conversationId)
             if (response.isSuccessful && response.body() != null) {
@@ -46,7 +46,7 @@ class ConversationRepository {
         }
     }
 
-    suspend fun sendMessage(conversationId: Int, body: String): Resource<ChatMessage> {
+    suspend fun sendMessage(conversationId: Int, body: String): Resource<Message> {
         return try {
             val response = ApiClient.api.sendMessage(conversationId, SendMessageRequest(body))
             if (response.isSuccessful && response.body() != null) {
@@ -61,7 +61,7 @@ class ConversationRepository {
 
     suspend fun markRead(conversationId: Int): Resource<Unit> {
         return try {
-            val response = ApiClient.api.markConversationRead(conversationId, ReadStatusRequest(true))
+            val response = ApiClient.api.markConversationRead(conversationId, true)
             if (response.isSuccessful) {
                 Resource.Success(Unit)
             } else {

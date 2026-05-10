@@ -2,6 +2,7 @@ package com.foodsharing.app.data.repository
 
 import com.foodsharing.app.data.api.ApiClient
 import com.foodsharing.app.data.model.LoginRequest
+import com.foodsharing.app.data.model.UserDetails
 import com.foodsharing.app.util.Resource
 import com.foodsharing.app.util.SessionManager
 import com.foodsharing.app.util.httpErrorMessage
@@ -45,7 +46,7 @@ class AuthRepository(private val sessionManager: SessionManager) {
         }
     }
 
-    suspend fun getCurrentUser() = try {
+    suspend fun getCurrentUser(): Resource<UserDetails> = try {
         val response = ApiClient.api.getCurrentUser()
         if (response.isSuccessful && response.body() != null) {
             Resource.Success(response.body()!!)

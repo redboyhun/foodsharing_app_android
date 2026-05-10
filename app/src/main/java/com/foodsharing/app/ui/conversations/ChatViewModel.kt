@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.foodsharing.app.data.model.ChatMessage
 import com.foodsharing.app.data.model.ConversationDetailResponse
+import com.foodsharing.app.data.model.Message
 import com.foodsharing.app.data.repository.ConversationRepository
 import com.foodsharing.app.util.Resource
 import kotlinx.coroutines.launch
@@ -17,8 +17,8 @@ class ChatViewModel : ViewModel() {
     private val _conversationDetail = MutableLiveData<Resource<ConversationDetailResponse>>()
     val conversationDetail: LiveData<Resource<ConversationDetailResponse>> = _conversationDetail
 
-    private val _sendState = MutableLiveData<Resource<ChatMessage>>()
-    val sendState: LiveData<Resource<ChatMessage>> = _sendState
+    private val _sendState = MutableLiveData<Resource<Message>>()
+    val sendState: LiveData<Resource<Message>> = _sendState
 
     var conversationId: Int = -1
 

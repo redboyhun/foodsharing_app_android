@@ -31,7 +31,8 @@ class PickupReminderWorker(
                 ApiClient.initialize(serverUrl, sessionManager)
             }
 
-            val response = ApiClient.api.getRegisteredPickups()
+            val userId = sessionManager.getUserId()
+            val response = ApiClient.api.getRegisteredPickups(userId)
             if (response.code() == 403) {
                 NotificationHelper.showSessionExpiredNotification(applicationContext)
                 return Result.success()

@@ -5,12 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.foodsharing.app.data.api.ApiClient
-import com.foodsharing.app.data.model.Profile
+import com.foodsharing.app.data.model.UserDetails
 import com.foodsharing.app.data.repository.AuthRepository
 import com.foodsharing.app.util.Resource
 import com.foodsharing.app.util.SessionManager
-import com.foodsharing.app.util.httpErrorMessage
 import com.foodsharing.app.worker.WorkScheduler
 import kotlinx.coroutines.launch
 
@@ -19,8 +17,8 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val sessionManager = SessionManager(application)
     private val authRepository = AuthRepository(sessionManager)
 
-    private val _profile = MutableLiveData<Resource<Profile>>()
-    val profile: LiveData<Resource<Profile>> = _profile
+    private val _profile = MutableLiveData<Resource<UserDetails>>()
+    val profile: LiveData<Resource<UserDetails>> = _profile
 
     private val _logoutState = MutableLiveData<Resource<Unit>>()
     val logoutState: LiveData<Resource<Unit>> = _logoutState
@@ -28,16 +26,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     fun loadProfile() {
         viewModelScope.launch {
             _profile.value = Resource.Loading
-            try {
-                val response = ApiClient.api.getUser()
-                _profile.value = if (response.isSuccessful && response.body() != null) {
-                    Resource.Success(response.body()!!)
-                } else {
-                    Resource.Error(httpErrorMessage(response.code()))
-                }
-            } catch (e: Exception) {
-                _profile.value = Resource.Error(e.message ?: "Network error")
-            }
+            _profile.value = authRepository.getCurrentUser()
         }
     }
 

@@ -32,12 +32,35 @@ data class Profile(
 )
 
 @JsonClass(generateAdapter = true)
-data class CurrentUserResponse(
+data class UserDetails(
     val id: Int,
-    val name: String,
-    val avatar: String? = null,
-    val email: String? = null
-)
+    val firstname: String,
+    val lastname: String,
+    val photo: String? = null,
+    val email: String? = null,
+    val aboutMePublic: String? = null,
+    val address: String? = null,
+    val postcode: String? = null,
+    val city: String? = null,
+    val coordinates: GeoLocation? = null,
+    @Json(name = "isSleeping") val isSleeping: Boolean? = null,
+    val foodsaver: Boolean? = null,
+    val isVerified: Boolean? = null,
+    val regionId: Int? = null,
+    val regionName: String? = null,
+    val role: Int? = null,
+    val gender: Int? = null,
+    val mobile: String? = null,
+    val landline: String? = null,
+    val birthday: String? = null,
+    val aboutMeIntern: String? = null,
+    val position: String? = null,
+    val regions: List<String>? = null,
+    val groups: List<String>? = null,
+    val mailboxId: Int? = null
+) {
+    val displayName: String get() = "$firstname $lastname".trim()
+}
 
 @JsonClass(generateAdapter = true)
 data class Basket(
@@ -50,16 +73,13 @@ data class Basket(
     val picture: String? = null,
     val pictures: List<String>? = null,
     val status: Int? = null,
-    @Json(name = "createdAt") val createdAt: String? = null,
-    @Json(name = "updatedAt") val updatedAt: String? = null,
-    @Json(name = "foodType") val foodType: Int? = null,
-    @Json(name = "lifetimeInDays") val lifetimeInDays: Int? = null,
-    val weight: Double? = null,
+    @Json(name = "created") val createdAt: String? = null,
+    @Json(name = "updated") val updatedAt: String? = null,
+    @Json(name = "lifeTimeInDays") val lifetimeInDays: Int? = null,
+    @Json(name = "weightInGrams") val weightInGrams: Int? = null,
     @Json(name = "requestCount") val requestCount: Int? = null,
     val creator: BasketCreator? = null,
-    val distance: Double? = null,
-    @Json(name = "distanceInKm") val distanceInKm: Double? = null,
-    val until: Long? = null
+    val until: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -77,8 +97,7 @@ data class CreateBasketRequest(
     @Json(name = "contactTypes") val contactTypes: List<Int> = listOf(1),
     val lat: Double? = null,
     val lon: Double? = null,
-    // @Json(name = "foodType") val foodType: Int? = null,
-    @Json(name = "lifetimeInDays") val lifetimeInDays: Int = 1,
+    @Json(name = "lifeTimeInDays") val lifetimeInDays: Int = 1,
     val weightInGrams: Int = 2000,
     val pictures: List<String> = emptyList()
 )
@@ -89,20 +108,27 @@ data class UpdateBasketRequest(
     @Json(name = "contactTypes") val contactTypes: List<Int>? = null,
     val lat: Double? = null,
     val lon: Double? = null,
-    @Json(name = "foodType") val foodType: Int? = null,
-    @Json(name = "lifetimeInDays") val lifetimeInDays: Int? = null,
-    val weight: Double? = null
+    @Json(name = "lifeTimeInDays") val lifetimeInDays: Int? = null,
+    @Json(name = "weightInGrams") val weightInGrams: Int? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class Message(
+    val id: Int? = null,
+    val body: String,
+    val sentAt: String? = null,
+    val authorId: Int? = null
 )
 
 @JsonClass(generateAdapter = true)
 data class Conversation(
     val id: Int,
     val title: String? = null,
-    @Json(name = "lastMessage") val lastMessage: ChatMessage? = null,
+    val lastMessage: Message? = null,
     @Json(name = "unreadMessages") val unreadMessages: Int = 0,
     val members: List<Int>? = null,
     @Json(name = "storeId") val storeId: Int? = null,
-    val messages: List<ChatMessage>? = null
+    val messages: List<Message>? = null
 )
 
 
@@ -131,7 +157,8 @@ data class ChatMessage(
 
 @JsonClass(generateAdapter = true)
 data class MessageCollection(
-    val messages: List<ChatMessage>
+    val messages: List<Message>,
+    val profiles: List<Profile>? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -183,7 +210,3 @@ data class OptionalMessage(
     val message: String? = null
 )
 
-@JsonClass(generateAdapter = true)
-data class ReadStatusRequest(
-    @Json(name = "isRead") val isRead: Boolean
-)

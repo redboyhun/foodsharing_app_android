@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.foodsharing.app.R
-import com.foodsharing.app.data.api.ApiClient
 import com.foodsharing.app.databinding.FragmentProfileBinding
 import com.foodsharing.app.ui.auth.LoginActivity
 import com.foodsharing.app.util.Resource
@@ -50,11 +49,10 @@ class ProfileFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBar.gone()
                     val profile = state.data
-                    binding.tvName.text = profile.name
+                    binding.tvName.text = profile.displayName
                     binding.tvEmail.text = profile.email ?: ""
-                    binding.tvDescription.text = profile.description ?: ""
-                    
-                    binding.ivAvatar.loadAvatarWithFallback(profile.avatar, profile.name, ApiClient.baseUrl)
+                    binding.tvDescription.text = profile.aboutMePublic ?: ""
+                    binding.ivAvatar.loadAvatarWithFallback(profile.photo, profile.displayName)
                 }
                 is Resource.Error -> {
                     binding.progressBar.gone()
