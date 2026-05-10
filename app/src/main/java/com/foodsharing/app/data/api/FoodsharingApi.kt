@@ -7,10 +7,10 @@ import retrofit2.http.*
 interface FoodsharingApi {
 
     // Auth
-    @POST("api/user/login")
+    @POST("api/login")
     suspend fun login(@Body request: LoginRequest): Response<Unit>
 
-    @DELETE("api/user/login")
+    @POST("api/logout")
     suspend fun logout(): Response<Unit>
 
     // Current user
