@@ -1,0 +1,20 @@
+> Task :app:compileDebugKotlin FAILED
+e: file://///app/src/main/java/com/foodsharing/app/ui/baskets/BasketAdapter.kt:22:46 Unresolved reference 'distance'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/baskets/BasketAdapter.kt:22:56 Cannot infer type for this parameter. Please specify it explicitly.
+e: file://///app/src/main/java/com/foodsharing/app/ui/baskets/BasketAdapter.kt:22:60 Cannot infer type for this parameter. Please specify it explicitly.
+e: file://///app/src/main/java/com/foodsharing/app/ui/baskets/BasketDetailFragment.kt:43:54 Unresolved reference 'distance'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/baskets/BasketDetailFragment.kt:43:64 Cannot infer type for this parameter. Please specify it explicitly.
+e: file://///app/src/main/java/com/foodsharing/app/ui/baskets/BasketDetailFragment.kt:43:68 Cannot infer type for this parameter. Please specify it explicitly.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/PickupOptionsAdapter.kt:11:7 Redeclaration:
+class PickupOptionsAdapter : ListAdapter<PickupOption, PickupOptionsAdapter.ViewHolder>
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/PickupsFragment.kt:21:45 Unresolved reference 'RegisteredPickupsAdapter'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/PickupsFragment.kt:36:29 Unresolved reference 'RegisteredPickupsAdapter'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/PickupsFragment.kt:36:56 Cannot infer type for this parameter. Please specify it explicitly.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/PickupsFragment.kt:37:42 Unresolved reference 'store'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/PickupsFragment.kt:37:59 Unresolved reference 'date'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/PickupsFragment.kt:62:62 Unresolved reference 'submitList'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/RegisteredPickupsAdapter.kt:11:7 Redeclaration:
+class PickupOptionsAdapter : ListAdapter<PickupOption, PickupOptionsAdapter.ViewHolder>
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/RegisteredPickupsAdapter.kt:21:21 Unresolved reference 'btnLeave'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/RegisteredPickupsAdapter.kt:21:49 Unresolved reference 'onLeaveClick'.
+e: file://///app/src/main/java/com/foodsharing/app/ui/pickups/RegisteredPickupsAdapter.kt:21:51 Unresolved reference 'onLeaveClick'.

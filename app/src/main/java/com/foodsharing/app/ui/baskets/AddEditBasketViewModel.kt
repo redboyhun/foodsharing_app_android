@@ -39,7 +39,7 @@ class AddEditBasketViewModel : ViewModel() {
                 UpdateBasketRequest(
                     description = description,
                     lifetimeInDays = lifetimeInDays,
-                    weight = weightInGrams?.toDouble()
+                    weightInGrams = weightInGrams
                 )
             )
         }
