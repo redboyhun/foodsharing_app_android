@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Foodsharing</string>
+    <string name="password">Passwort</string>
+    <string name="login">Anmelden</string>
+    <string name="logout">Abmelden</string>
+    <string name="baskets">Essenskörbe</string>
+    <string name="nearby_baskets">Essenskörbe nah Zuhause</string>
+    <string name="my_baskets">Meine Essenskörbe</string>
+    <string name="basket_detail">Essenskorb</string>
+    <string name="add_basket">Neue Essenskorb</string>
+    <string name="basket_description">Beschreibung</string>
+    <string name="request_basket">Essenskorb anfragen</string>
+    <string name="request_message_hint">Schreibe eine Nachricht an den Anbieter</string>
+    <string name="error_message_required">Nachricht ist erforderlich</string>
+    <string name="basket_request_sent">Anfrage gesendet</string>
+    <string name="no_baskets_nearby">Keine Essenskörbe in der Nähe</string>
+    <string name="no_baskets">Noch keine Essenskörbe</string>
+    <string name="conversations">Nachrichten</string>
+    <string name="type_message">Schreibe eine Nachricht...</string>
+    <string name="send">Senden</string>
+    <string name="no_conversations">Keine Unterhaltungen</string>
+    <string name="pickups">Abholungen</string>
+    <string name="registered_pickups">Meine zukünftige Abholungen</string>
+    <string name="available_pickups">Verfügbare Termine</string>
+    <string name="join">Beitreten</string>
+    <string name="leave">Verlassen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="settings_saved">Einstellungen gespeichert</string>
+    <string name="refresh_interval">Aktualisierungsintervall</string>
+    <string name="settings_interval_note">Notiz: Android schreibt min. 15 Min Intervall vor.</string>
+    <string name="notifications">Benachrichtigungen</string>
+    <string name="notify_messages">Neue Nachrichten</string>
+    <string name="notify_baskets">Essenskörbe in der Nähe</string>
+    <string name="notify_pickups">Abholungserinnerungen</string>
+    <string name="basket_distance_km">Entfernung der Essenskörbe</string>
+    <string name="save">Speichern</string>
+    <string name="notif_channel_messages">Nachrichten</string>
+    <string name="notif_channel_messages_desc">Benachrichtigungen neuer Nachrichten</string>
+    <string name="notif_channel_baskets">Essenskörbe in der Nähe</string>
+    <string name="notif_channel_baskets_desc">Benachrichtigungen neuer Essenskörbe</string>
+    <string name="notif_channel_pickups">Abholungserinnerungen</string>
+    <string name="notif_channel_pickups_desc">Zukünftige Abholungserinnerungen</string>
+    <string name="notif_new_message">Neue Nachrichten</string>
+    <string name="notif_new_basket">Neue Essenskörbe in der Nähe</string>
+    <string name="notif_pickup_reminder">Zukünftige Abholungen</string>
+</resources>

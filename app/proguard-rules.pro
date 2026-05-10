@@ -1,0 +1,4 @@
+-keep class com.foodsharing.app.data.model.** { *; }
+-keepclassmembers class com.foodsharing.app.data.model.** { *; }
+-keep class com.squareup.moshi.** { *; }
+-keepclassmembers class ** { @com.squareup.moshi.FromJson *; @com.squareup.moshi.ToJson *; }

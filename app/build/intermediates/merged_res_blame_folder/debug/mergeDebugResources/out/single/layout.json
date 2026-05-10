@@ -1,0 +1,70 @@
+[
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\item_pickup_option.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_pickup_option.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_chat.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_chat.xml"
+    },
+    {
+        "merged": "com.foodsharing.app-mergeDebugResources-62:/layout/fragment_add_edit_basket.xml",
+        "source": "com.foodsharing.app-main-65:/layout/fragment_add_edit_basket.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_conversations.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_conversations.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_settings.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\item_basket.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_basket.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_nearby_baskets.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_nearby_baskets.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\item_chat_message.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_chat_message.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_profile.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_add_edit_basket.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_add_edit_basket.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_my_baskets.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_my_baskets.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\item_registered_pickup.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_registered_pickup.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_basket_detail.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_basket_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\item_conversation.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_conversation.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-mergeDebugResources-62:\\layout\\fragment_pickups.xml",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_pickups.xml"
+    }
+]

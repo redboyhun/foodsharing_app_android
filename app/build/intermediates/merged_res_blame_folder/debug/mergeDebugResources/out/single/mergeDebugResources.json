@@ -1,0 +1,162 @@
+[
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_pickups.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_pickups.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_nearby_baskets.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_nearby_baskets.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\drawable_ic_basket.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\drawable\\ic_basket.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_add_edit_basket.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_add_edit_basket.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_item_registered_pickup.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_registered_pickup.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\drawable_ic_chat.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\drawable\\ic_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_profile.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_settings.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.foodsharing.app-debug-63:/layout_fragment_add_edit_basket.xml.flat",
+        "source": "com.foodsharing.app-main-65:/layout/fragment_add_edit_basket.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_my_baskets.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_my_baskets.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_basket_detail.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_basket_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_item_chat_message.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_chat_message.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_chat.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_item_basket.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_basket.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\drawable_ic_pickup.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\drawable\\ic_pickup.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_item_pickup_option.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_pickup_option.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_fragment_conversations.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\fragment_conversations.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\drawable_ic_notification.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\drawable\\ic_notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\mipmap-hdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\drawable_ic_profile.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\drawable\\ic_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-debug-63:\\layout_item_conversation.xml.flat",
+        "source": "C:\\Users\\grim\\.gradle\\daemon\\9.3.1\\com.foodsharing.app-main-65:\\layout\\item_conversation.xml"
+    }
+]

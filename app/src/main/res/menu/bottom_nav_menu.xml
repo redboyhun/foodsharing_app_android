@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nearbyBasketsFragment"
+        android:icon="@drawable/ic_basket"
+        android:title="@string/baskets" />
+
+    <item
+        android:id="@+id/conversationsFragment"
+        android:icon="@drawable/ic_chat"
+        android:title="@string/conversations" />
+
+    <item
+        android:id="@+id/pickupsFragment"
+        android:icon="@drawable/ic_pickup"
+        android:title="@string/pickups" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile" />
+
+</menu>
