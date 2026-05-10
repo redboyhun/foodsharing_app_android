@@ -26,13 +26,18 @@ public final class ItemConversationBinding implements ViewBinding {
   public final TextView tvName;
 
   @NonNull
+  public final TextView tvTimestamp;
+
+  @NonNull
   public final View unreadIndicator;
 
   private ItemConversationBinding(@NonNull MaterialCardView rootView,
-      @NonNull TextView tvLastMessage, @NonNull TextView tvName, @NonNull View unreadIndicator) {
+      @NonNull TextView tvLastMessage, @NonNull TextView tvName, @NonNull TextView tvTimestamp,
+      @NonNull View unreadIndicator) {
     this.rootView = rootView;
     this.tvLastMessage = tvLastMessage;
     this.tvName = tvName;
+    this.tvTimestamp = tvTimestamp;
     this.unreadIndicator = unreadIndicator;
   }
 
@@ -75,6 +80,12 @@ public final class ItemConversationBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvTimestamp;
+      TextView tvTimestamp = ViewBindings.findChildViewById(rootView, id);
+      if (tvTimestamp == null) {
+        break missingId;
+      }
+
       id = R.id.unreadIndicator;
       View unreadIndicator = ViewBindings.findChildViewById(rootView, id);
       if (unreadIndicator == null) {
@@ -82,7 +93,7 @@ public final class ItemConversationBinding implements ViewBinding {
       }
 
       return new ItemConversationBinding((MaterialCardView) rootView, tvLastMessage, tvName,
-          unreadIndicator);
+          tvTimestamp, unreadIndicator);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -65,6 +65,7 @@ id swipeRefresh
 id switchBaskets
 id switchMessages
 id switchPickups
+id tilMessage
 id tvAuthor
 id tvBody
 id tvCreator
@@ -78,6 +79,7 @@ id tvName
 id tvSlots
 id tvStoreName
 id tvTime
+id tvTimestamp
 id unreadIndicator
 layout activity_login
 layout activity_main
@@ -113,6 +115,7 @@ string baskets
 string chat
 string conversations
 string email
+string error_message_required
 string join
 string leave
 string login
@@ -142,6 +145,7 @@ string profile
 string refresh_interval
 string registered_pickups
 string request_basket
+string request_message_hint
 string save
 string select_server
 string send

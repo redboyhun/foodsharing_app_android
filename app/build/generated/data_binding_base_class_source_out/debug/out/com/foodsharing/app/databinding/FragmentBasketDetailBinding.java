@@ -14,6 +14,8 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.foodsharing.app.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -26,10 +28,16 @@ public final class FragmentBasketDetailBinding implements ViewBinding {
   public final MaterialButton btnRequest;
 
   @NonNull
+  public final TextInputEditText etMessage;
+
+  @NonNull
   public final ImageView ivBasketPicture;
 
   @NonNull
   public final ProgressBar progressBar;
+
+  @NonNull
+  public final TextInputLayout tilMessage;
 
   @NonNull
   public final TextView tvCreator;
@@ -41,13 +49,16 @@ public final class FragmentBasketDetailBinding implements ViewBinding {
   public final TextView tvDistance;
 
   private FragmentBasketDetailBinding(@NonNull ScrollView rootView,
-      @NonNull MaterialButton btnRequest, @NonNull ImageView ivBasketPicture,
-      @NonNull ProgressBar progressBar, @NonNull TextView tvCreator,
+      @NonNull MaterialButton btnRequest, @NonNull TextInputEditText etMessage,
+      @NonNull ImageView ivBasketPicture, @NonNull ProgressBar progressBar,
+      @NonNull TextInputLayout tilMessage, @NonNull TextView tvCreator,
       @NonNull TextView tvDescription, @NonNull TextView tvDistance) {
     this.rootView = rootView;
     this.btnRequest = btnRequest;
+    this.etMessage = etMessage;
     this.ivBasketPicture = ivBasketPicture;
     this.progressBar = progressBar;
+    this.tilMessage = tilMessage;
     this.tvCreator = tvCreator;
     this.tvDescription = tvDescription;
     this.tvDistance = tvDistance;
@@ -86,6 +97,12 @@ public final class FragmentBasketDetailBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.etMessage;
+      TextInputEditText etMessage = ViewBindings.findChildViewById(rootView, id);
+      if (etMessage == null) {
+        break missingId;
+      }
+
       id = R.id.ivBasketPicture;
       ImageView ivBasketPicture = ViewBindings.findChildViewById(rootView, id);
       if (ivBasketPicture == null) {
@@ -95,6 +112,12 @@ public final class FragmentBasketDetailBinding implements ViewBinding {
       id = R.id.progressBar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
+        break missingId;
+      }
+
+      id = R.id.tilMessage;
+      TextInputLayout tilMessage = ViewBindings.findChildViewById(rootView, id);
+      if (tilMessage == null) {
         break missingId;
       }
 
@@ -116,8 +139,8 @@ public final class FragmentBasketDetailBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentBasketDetailBinding((ScrollView) rootView, btnRequest, ivBasketPicture,
-          progressBar, tvCreator, tvDescription, tvDistance);
+      return new FragmentBasketDetailBinding((ScrollView) rootView, btnRequest, etMessage,
+          ivBasketPicture, progressBar, tilMessage, tvCreator, tvDescription, tvDistance);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

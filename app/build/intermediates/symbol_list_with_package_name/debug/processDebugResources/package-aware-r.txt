@@ -3720,6 +3720,7 @@ id textinput_helper_text
 id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
+id tilMessage
 id time
 id title
 id titleDividerNoCustom
@@ -3752,6 +3753,7 @@ id tvName
 id tvSlots
 id tvStoreName
 id tvTime
+id tvTimestamp
 id unchecked
 id uniform
 id unlabeled
@@ -4074,6 +4076,7 @@ string dest_title
 string email
 string error_a11y_label
 string error_icon_content_description
+string error_message_required
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
@@ -4216,6 +4219,7 @@ string profile
 string refresh_interval
 string registered_pickups
 string request_basket
+string request_message_hint
 string save
 string search_menu_title
 string searchbar_scrolling_view_behavior

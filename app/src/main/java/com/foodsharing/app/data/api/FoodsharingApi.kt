@@ -14,7 +14,7 @@ interface FoodsharingApi {
     suspend fun logout(): Response<Unit>
 
     // Current user
-    @GET("api/user/current")
+    @GET("api/users/current/details")
     suspend fun getCurrentUser(): Response<CurrentUserResponse>
 
     // Baskets
@@ -23,7 +23,7 @@ interface FoodsharingApi {
         @Query("distance") distance: Int = 3
     ): Response<List<Basket>>
 
-    @GET("api/user/current/baskets")
+    @GET("api/users/current/baskets")
     suspend fun getMyBaskets(): Response<List<Basket>>
 
     @GET("api/baskets/{basketId}")
@@ -99,6 +99,6 @@ interface FoodsharingApi {
     suspend fun getUserStores(): Response<List<StoreInfo>>
 
     // Profile
-    @GET("api/user/current")
+    @GET("api/users/current/details")
     suspend fun getUser(): Response<Profile>
 }
