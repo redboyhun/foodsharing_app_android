@@ -63,7 +63,12 @@ object NotificationHelper {
         )
     }
 
-    fun showNewMessageNotification(context: Context, conversationName: String, notifId: Int) {
+    fun showNewMessageNotification(
+        context: Context,
+        conversationName: String,
+        notifId: Int,
+        messagePreview: String? = null
+    ) {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra("navigate_to", "conversations")
@@ -71,16 +76,19 @@ object NotificationHelper {
         val pi = PendingIntent.getActivity(
             context, notifId, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
-        val notif = NotificationCompat.Builder(context, CHANNEL_MESSAGES)
+        val builder = NotificationCompat.Builder(context, CHANNEL_MESSAGES)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(context.getString(R.string.notif_new_message))
-            .setContentText(conversationName)
+            .setContentTitle(conversationName)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pi)
             .setAutoCancel(true)
-            .build()
+        if (messagePreview != null) {
+            builder.setContentText(messagePreview)
+        } else {
+            builder.setContentText(context.getString(R.string.notif_new_message))
+        }
 
-        NotificationManagerCompat.from(context).notify(notifId, notif)
+        NotificationManagerCompat.from(context).notify(notifId, builder.build())
     }
 
     fun showNearbyBasketNotification(context: Context, description: String, notifId: Int) {

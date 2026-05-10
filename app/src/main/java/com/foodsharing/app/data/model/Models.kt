@@ -70,22 +70,13 @@ data class BasketCreator(
     @Json(name = "isSleeping") val isSleeping: Boolean? = null
 )
 
-@JsonClass(generateAdapter = true)
-data class BasketsResponse(
-    val baskets: List<Basket>
-)
-
-@JsonClass(generateAdapter = true)
-data class BasketResponse(
-    val basket: Basket
-)
 
 @JsonClass(generateAdapter = true)
 data class CreateBasketRequest(
     val description: String,
     @Json(name = "contactTypes") val contactTypes: List<Int> = listOf(1),
-    val lat: Double = null,
-    val lon: Double = null,
+    val lat: Double? = null,
+    val lon: Double? = null,
     // @Json(name = "foodType") val foodType: Int? = null,
     @Json(name = "lifetimeInDays") val lifetimeInDays: Int = 1,
     val weightInGrams: Int = 2000,
@@ -114,12 +105,6 @@ data class Conversation(
     val messages: List<ChatMessage>? = null
 )
 
-@JsonClass(generateAdapter = true)
-data class ConversationMember(
-    val id: Int,
-    val name: String,
-    val avatar: String? = null
-)
 
 @JsonClass(generateAdapter = true)
 data class ConversationsResponse(
@@ -171,10 +156,6 @@ data class PickupOption(
     val description: String? = null
 )
 
-@JsonClass(generateAdapter = true)
-data class PickupOptionsResponse(
-    val pickups: List<PickupOption>
-)
 
 @JsonClass(generateAdapter = true)
 data class RegisteredPickup(
@@ -186,10 +167,6 @@ data class RegisteredPickup(
     val description: String? = null
 )
 
-@JsonClass(generateAdapter = true)
-data class RegisteredPickupsResponse(
-    val pickups: List<RegisteredPickup>
-)
 
 @JsonClass(generateAdapter = true)
 data class StoreInfo(
@@ -200,15 +177,6 @@ data class StoreInfo(
     val lon: Double? = null
 )
 
-@JsonClass(generateAdapter = true)
-data class StoresResponse(
-    val stores: List<StoreInfo>
-)
-
-@JsonClass(generateAdapter = true)
-data class IDList(
-    val ids: List<Int>
-)
 
 @JsonClass(generateAdapter = true)
 data class OptionalMessage(

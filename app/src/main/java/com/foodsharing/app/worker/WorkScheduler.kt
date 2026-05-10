@@ -10,6 +10,8 @@ object WorkScheduler {
     private const val TAG_BASKET = "basket_refresh"
     private const val TAG_PICKUP = "pickup_reminder"
 
+    private const val MIN_INTERVAL_MINUTES = 15L
+
     fun scheduleAll(context: Context, intervalMinutes: Int) {
         scheduleConversationRefresh(context, intervalMinutes)
         scheduleBasketRefresh(context, intervalMinutes)
@@ -17,8 +19,9 @@ object WorkScheduler {
     }
 
     fun scheduleConversationRefresh(context: Context, intervalMinutes: Int) {
+        val safeInterval = intervalMinutes.toLong().coerceAtLeast(MIN_INTERVAL_MINUTES)
         val request = PeriodicWorkRequestBuilder<ConversationRefreshWorker>(
-            intervalMinutes.toLong(), TimeUnit.MINUTES
+            safeInterval, TimeUnit.MINUTES
         )
             .addTag(TAG_CONVERSATION)
             .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())
@@ -32,8 +35,9 @@ object WorkScheduler {
     }
 
     fun scheduleBasketRefresh(context: Context, intervalMinutes: Int) {
+        val safeInterval = intervalMinutes.toLong().coerceAtLeast(MIN_INTERVAL_MINUTES)
         val request = PeriodicWorkRequestBuilder<BasketRefreshWorker>(
-            intervalMinutes.toLong(), TimeUnit.MINUTES
+            safeInterval, TimeUnit.MINUTES
         )
             .addTag(TAG_BASKET)
             .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())
@@ -47,8 +51,9 @@ object WorkScheduler {
     }
 
     fun schedulePickupReminder(context: Context, intervalMinutes: Int) {
+        val safeInterval = intervalMinutes.toLong().coerceAtLeast(MIN_INTERVAL_MINUTES)
         val request = PeriodicWorkRequestBuilder<PickupReminderWorker>(
-            intervalMinutes.toLong(), TimeUnit.MINUTES
+            safeInterval, TimeUnit.MINUTES
         )
             .addTag(TAG_PICKUP)
             .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())

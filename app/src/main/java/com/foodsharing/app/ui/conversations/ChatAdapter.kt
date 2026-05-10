@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.foodsharing.app.data.model.ChatMessage
 import com.foodsharing.app.data.model.Profile
 import com.foodsharing.app.databinding.ItemChatMessageBinding
+import com.foodsharing.app.util.formatMessageTime
 
 class ChatAdapter(
     private val currentUserId: Int
@@ -27,7 +28,7 @@ class ChatAdapter(
             val author = profiles.find { it.id == message.authorId }
             binding.tvAuthor.text = author?.name ?: message.authorName ?: "Unknown"
             binding.tvBody.text = message.body
-            binding.tvTime.text = message.sentAt?.take(16)?.replace("T", " ") ?: ""
+            binding.tvTime.text = formatMessageTime(message.sentAt)
             
             // Basic alignment based on author
             val params = binding.root.layoutParams as? ViewGroup.MarginLayoutParams

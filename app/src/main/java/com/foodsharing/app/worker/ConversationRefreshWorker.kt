@@ -51,7 +51,8 @@ class ConversationRefreshWorker(
                         NotificationHelper.showNewMessageNotification(
                             applicationContext,
                             name,
-                            NOTIF_ID_BASE + conv.id
+                            NOTIF_ID_BASE + conv.id,
+                            conv.lastMessage?.body
                         )
                         prefs.edit().putInt(key, lastMsgId).apply()
                     }

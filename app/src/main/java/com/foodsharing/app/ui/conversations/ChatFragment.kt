@@ -72,7 +72,21 @@ class ChatFragment : Fragment() {
         }
 
         viewModel.sendState.observe(viewLifecycleOwner) { state ->
-            if (state is Resource.Error) toast(state.message)
+            when (state) {
+                is Resource.Loading -> {
+                    binding.btnSend.isEnabled = false
+                    binding.etMessage.isEnabled = false
+                }
+                is Resource.Success -> {
+                    binding.btnSend.isEnabled = true
+                    binding.etMessage.isEnabled = true
+                }
+                is Resource.Error -> {
+                    binding.btnSend.isEnabled = true
+                    binding.etMessage.isEnabled = true
+                    toast(state.message)
+                }
+            }
         }
 
         viewModel.loadConversation(args.conversationId)

@@ -4,6 +4,7 @@ import com.foodsharing.app.data.api.ApiClient
 import com.foodsharing.app.data.model.LoginRequest
 import com.foodsharing.app.util.Resource
 import com.foodsharing.app.util.SessionManager
+import com.foodsharing.app.util.httpErrorMessage
 
 class AuthRepository(private val sessionManager: SessionManager) {
 
@@ -28,7 +29,7 @@ class AuthRepository(private val sessionManager: SessionManager) {
 
                 Resource.Success(Unit)
             } else {
-                Resource.Error("Login failed: ${response.code()}")
+                Resource.Error(httpErrorMessage(response.code()))
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "Network error")
@@ -49,7 +50,7 @@ class AuthRepository(private val sessionManager: SessionManager) {
         if (response.isSuccessful && response.body() != null) {
             Resource.Success(response.body()!!)
         } else {
-            Resource.Error("Failed to get user: ${response.code()}")
+            Resource.Error(httpErrorMessage(response.code()))
         }
     } catch (e: Exception) {
         Resource.Error(e.message ?: "Network error")

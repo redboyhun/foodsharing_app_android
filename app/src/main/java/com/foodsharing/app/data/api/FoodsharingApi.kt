@@ -96,9 +96,7 @@ interface FoodsharingApi {
 
     // Stores
     @GET("api/user/current/stores")
-    suspend fun getUserStores(
-        @Path("userId") userId: String = "current"
-    ): Response<List<StoreInfo>>
+    suspend fun getUserStores(): Response<List<StoreInfo>>
 
     // Profile
     @GET("api/user/current")

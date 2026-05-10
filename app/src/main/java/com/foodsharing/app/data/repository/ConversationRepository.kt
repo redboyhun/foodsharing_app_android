@@ -3,6 +3,7 @@ package com.foodsharing.app.data.repository
 import com.foodsharing.app.data.api.ApiClient
 import com.foodsharing.app.data.model.*
 import com.foodsharing.app.util.Resource
+import com.foodsharing.app.util.httpErrorMessage
 
 class ConversationRepository {
 
@@ -12,7 +13,7 @@ class ConversationRepository {
             if (response.isSuccessful && response.body() != null) {
                 Resource.Success(response.body()!!)
             } else {
-                Resource.Error("Error ${response.code()}")
+                Resource.Error(httpErrorMessage(response.code()))
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "Network error")
@@ -25,7 +26,7 @@ class ConversationRepository {
             if (response.isSuccessful && response.body() != null) {
                 Resource.Success(response.body()!!)
             } else {
-                Resource.Error("Error ${response.code()}")
+                Resource.Error(httpErrorMessage(response.code()))
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "Network error")
@@ -38,7 +39,7 @@ class ConversationRepository {
             if (response.isSuccessful && response.body() != null) {
                 Resource.Success(response.body()!!.messages)
             } else {
-                Resource.Error("Error ${response.code()}")
+                Resource.Error(httpErrorMessage(response.code()))
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "Network error")
@@ -51,7 +52,7 @@ class ConversationRepository {
             if (response.isSuccessful && response.body() != null) {
                 Resource.Success(response.body()!!)
             } else {
-                Resource.Error("Error ${response.code()}")
+                Resource.Error(httpErrorMessage(response.code()))
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "Network error")
@@ -64,7 +65,7 @@ class ConversationRepository {
             if (response.isSuccessful) {
                 Resource.Success(Unit)
             } else {
-                Resource.Error("Error ${response.code()}")
+                Resource.Error(httpErrorMessage(response.code()))
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "Network error")

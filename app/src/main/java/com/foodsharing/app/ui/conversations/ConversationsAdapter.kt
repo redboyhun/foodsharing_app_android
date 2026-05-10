@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.foodsharing.app.data.model.Conversation
 import com.foodsharing.app.data.model.Profile
 import com.foodsharing.app.databinding.ItemConversationBinding
+import com.foodsharing.app.util.formatMessageTime
 
 class ConversationsAdapter(
     private val currentUserId: Int,
@@ -35,6 +36,7 @@ class ConversationsAdapter(
             
             binding.tvName.text = if (!title.isNullOrBlank()) title else "Conversation"
             binding.tvLastMessage.text = conversation.lastMessage?.body?.take(60) ?: ""
+            binding.tvTimestamp.text = formatMessageTime(conversation.lastMessage?.sentAt)
             binding.unreadIndicator.visibility =
                 if (conversation.unreadMessages > 0) android.view.View.VISIBLE else android.view.View.GONE
             binding.root.setOnClickListener { onClick(conversation) }

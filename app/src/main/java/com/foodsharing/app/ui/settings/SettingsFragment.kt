@@ -19,7 +19,7 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: SettingsViewModel by viewModels()
 
-    private val intervalOptions = listOf(5, 10, 15, 30, 60)
+    private val intervalOptions = listOf(15, 30, 60)
     private val intervalLabels get() = intervalOptions.map { "$it min" }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

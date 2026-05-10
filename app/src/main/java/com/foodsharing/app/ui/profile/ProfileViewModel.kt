@@ -10,6 +10,7 @@ import com.foodsharing.app.data.model.Profile
 import com.foodsharing.app.data.repository.AuthRepository
 import com.foodsharing.app.util.Resource
 import com.foodsharing.app.util.SessionManager
+import com.foodsharing.app.util.httpErrorMessage
 import com.foodsharing.app.worker.WorkScheduler
 import kotlinx.coroutines.launch
 
@@ -32,7 +33,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                 _profile.value = if (response.isSuccessful && response.body() != null) {
                     Resource.Success(response.body()!!)
                 } else {
-                    Resource.Error("Error ${response.code()}")
+                    Resource.Error(httpErrorMessage(response.code()))
                 }
             } catch (e: Exception) {
                 _profile.value = Resource.Error(e.message ?: "Network error")

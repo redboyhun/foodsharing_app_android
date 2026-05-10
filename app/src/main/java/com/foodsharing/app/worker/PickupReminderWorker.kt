@@ -48,6 +48,8 @@ class PickupReminderWorker(
                 val storeName = pickup.store.name
                 val storeId = pickup.store.id
 
+                val timeLabel = pickupTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+
                 // Notify for same-day pickups (within 24h, not yet past)
                 if (minutesUntil in 0..1440) {
                     val sameDayKey = "notif_sameday_${storeId}_${pickup.date}"
@@ -55,7 +57,7 @@ class PickupReminderWorker(
                         NotificationHelper.showPickupReminderNotification(
                             applicationContext,
                             storeName,
-                            "today",
+                            "today at $timeLabel",
                             NOTIF_ID_BASE + storeId
                         )
                         prefs.edit().putBoolean(sameDayKey, true).apply()
@@ -69,7 +71,7 @@ class PickupReminderWorker(
                         NotificationHelper.showPickupReminderNotification(
                             applicationContext,
                             storeName,
-                            "in ~1 hour",
+                            "at $timeLabel (in ~1 hour)",
                             NOTIF_ID_BASE + 10000 + storeId
                         )
                         prefs.edit().putBoolean(hourKey, true).apply()

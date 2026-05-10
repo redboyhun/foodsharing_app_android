@@ -81,7 +81,7 @@ class SettingsManager(private val context: Context) {
     }
 
     companion object {
-        const val DEFAULT_REFRESH_INTERVAL = 5 // minutes (displayed; WorkManager enforces 15 min min)
+        const val DEFAULT_REFRESH_INTERVAL = 15
         const val DEFAULT_SERVER_URL = "https://foodsharing.de/"
         const val BETA_SERVER_URL = "https://beta.foodsharing.de/"
         const val DEFAULT_BASKET_DISTANCE = 30

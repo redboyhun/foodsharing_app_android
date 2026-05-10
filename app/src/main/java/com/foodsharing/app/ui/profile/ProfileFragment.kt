@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.foodsharing.app.R
 import com.foodsharing.app.data.api.ApiClient
 import com.foodsharing.app.databinding.FragmentProfileBinding
 import com.foodsharing.app.ui.auth.LoginActivity
 import com.foodsharing.app.util.Resource
 import com.foodsharing.app.util.gone
+import com.foodsharing.app.util.loadAvatarWithFallback
 import com.foodsharing.app.util.toast
 import com.foodsharing.app.util.visible
 
@@ -54,21 +54,7 @@ class ProfileFragment : Fragment() {
                     binding.tvEmail.text = profile.email ?: ""
                     binding.tvDescription.text = profile.description ?: ""
                     
-                    val avatarUrl = if (!profile.avatar.isNullOrEmpty()) {
-                        if (profile.avatar.startsWith("/")) {
-                            ApiClient.baseUrl.removeSuffix("/") + profile.avatar
-                        } else {
-                            profile.avatar
-                        }
-                    } else {
-                        null
-                    }
-
-                    Glide.with(this)
-                        .load(avatarUrl)
-                        .placeholder(R.drawable.ic_profile)
-                        .error(R.drawable.ic_profile)
-                        .into(binding.ivAvatar)
+                    binding.ivAvatar.loadAvatarWithFallback(profile.avatar, profile.name, ApiClient.baseUrl)
                 }
                 is Resource.Error -> {
                     binding.progressBar.gone()
