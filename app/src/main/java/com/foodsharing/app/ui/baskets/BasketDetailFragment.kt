@@ -1,9 +1,12 @@
 package com.foodsharing.app.ui.baskets
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -57,6 +60,9 @@ class BasketDetailFragment : Fragment() {
 
                     if (imageUrl != null) {
                         Glide.with(this).load(imageUrl).into(binding.ivBasketPicture)
+                        binding.ivBasketPicture.setOnClickListener { showFullScreenImage(imageUrl) }
+                    } else {
+                        binding.ivBasketPicture.setOnClickListener(null)
                     }
 
                     binding.btnRequest.setOnClickListener {
@@ -88,6 +94,18 @@ class BasketDetailFragment : Fragment() {
         }
 
         viewModel.loadBasket(args.basketId)
+    }
+
+    private fun showFullScreenImage(url: String) {
+        val dialog = Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val imageView = ImageView(requireContext()).apply {
+            scaleType = ImageView.ScaleType.FIT_CENTER
+            setOnClickListener { dialog.dismiss() }
+        }
+        dialog.setContentView(imageView)
+        Glide.with(this).load(url).into(imageView)
+        dialog.show()
     }
 
     override fun onDestroyView() {

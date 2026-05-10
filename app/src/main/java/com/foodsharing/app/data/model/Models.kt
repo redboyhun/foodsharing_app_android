@@ -55,12 +55,24 @@ data class UserDetails(
     val birthday: String? = null,
     val aboutMeIntern: String? = null,
     val position: String? = null,
-    val regions: List<String>? = null,
-    val groups: List<String>? = null,
+    val regions: List<UserRegion>? = null,
+    val groups: List<UserGroup>? = null,
     val mailboxId: Int? = null
 ) {
     val displayName: String get() = "$firstname $lastname".trim()
 }
+
+@JsonClass(generateAdapter = true)
+data class UserRegion(
+    val id: Int? = null,
+    val name: String? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class UserGroup(
+    val id: Int? = null,
+    val name: String? = null
+)
 
 @JsonClass(generateAdapter = true)
 data class Basket(
