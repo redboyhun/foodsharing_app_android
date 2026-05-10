@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.foodsharing.app.data.model.Message
 import com.foodsharing.app.data.model.Profile
-import com.foodsharing.app.databinding.ItemMessageBinding
+import com.foodsharing.app.databinding.ItemChatMessageBinding
 import com.foodsharing.app.util.formatMessageTime
 
 class ChatAdapter(
@@ -21,7 +21,7 @@ class ChatAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: ItemMessageBinding) :
+    inner class ViewHolder(private val binding: ItemChatMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(message: Message) {
@@ -44,7 +44,7 @@ class ChatAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemChatMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
