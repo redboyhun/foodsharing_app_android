@@ -4,6 +4,7 @@ import com.foodsharing.app.data.api.ApiClient
 import com.foodsharing.app.data.model.*
 import com.foodsharing.app.util.Resource
 import com.foodsharing.app.util.httpErrorMessage
+import com.foodsharing.app.util.toUtcIsoString
 
 class PickupRepository {
 
@@ -35,7 +36,8 @@ class PickupRepository {
 
     suspend fun joinPickup(storeId: Int, pickupDate: String): Resource<Unit> {
         return try {
-            val response = ApiClient.api.joinPickup(storeId, pickupDate)
+            val utcDate = toUtcIsoString(pickupDate)
+            val response = ApiClient.api.joinPickup(storeId, utcDate)
             if (response.isSuccessful) {
                 Resource.Success(Unit)
             } else {
@@ -46,9 +48,10 @@ class PickupRepository {
         }
     }
 
-    suspend fun leavePickup(storeId: Int, pickupDate: String): Resource<Unit> {
+    suspend fun leavePickup(storeId: Int, pickupDate: String, userId: Int): Resource<Unit> {
         return try {
-            val response = ApiClient.api.leavePickup(storeId, pickupDate)
+            val utcDate = toUtcIsoString(pickupDate)
+            val response = ApiClient.api.leavePickup(storeId, utcDate, userId)
             if (response.isSuccessful) {
                 Resource.Success(Unit)
             } else {

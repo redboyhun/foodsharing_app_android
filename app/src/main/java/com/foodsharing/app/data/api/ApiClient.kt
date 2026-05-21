@@ -18,6 +18,7 @@ object ApiClient {
     private var _api: FoodsharingApi? = null
     private var _baseUrl: String = "https://foodsharing.de/"
     private var _sessionManager: SessionManager? = null
+    private var _okHttpClient: OkHttpClient? = null
 
     val api: FoodsharingApi
         get() = _api ?: throw IllegalStateException("ApiClient not initialized")
@@ -25,17 +26,21 @@ object ApiClient {
     val baseUrl: String
         get() = _baseUrl
 
+    val okHttpClient: OkHttpClient?
+        get() = _okHttpClient
+
+    val sessionManager: SessionManager?
+        get() = _sessionManager
+
     fun initialize(baseUrl: String, sessionManager: SessionManager) {
         _baseUrl = if (baseUrl.endsWith("/")) baseUrl else "$baseUrl/"
         _sessionManager = sessionManager
-        _api = buildApi(sessionManager)
+        val client = buildOkHttpClient(sessionManager)
+        _okHttpClient = client
+        _api = buildApi(client)
     }
 
-    private fun buildApi(sessionManager: SessionManager): FoodsharingApi {
-        val moshi = Moshi.Builder()
-            .addLast(KotlinJsonAdapterFactory())
-            .build()
-
+    private fun buildOkHttpClient(sessionManager: SessionManager): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -43,27 +48,27 @@ object ApiClient {
         val cookieJar = object : CookieJar {
             override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
                 cookies.forEach { cookie ->
-                    if (cookie.name == "PHPSESSID") {
-                        sessionManager.saveSession(cookie.value)
+                    when (cookie.name) {
+                        "FS_SESSID", "PHPSESSID" -> sessionManager.saveSession(cookie.value)
+                        "FS_CSRF_TOKEN" -> sessionManager.saveCsrfToken(cookie.value)
                     }
                 }
             }
 
             override fun loadForRequest(url: HttpUrl): List<Cookie> {
-                // We handle session cookies in the interceptor to include FS_CSRF_TOKEN and FS_SESSID
                 return emptyList()
             }
         }
 
-        val client = OkHttpClient.Builder()
+        return OkHttpClient.Builder()
             .cookieJar(cookieJar)
             .addInterceptor { chain ->
                 val original = chain.request()
-                // Only exclude the initial login request from needing a CSRF token
                 val isLogin = original.url.encodedPath.endsWith("api/user/login")
 
                 val builder = original.newBuilder()
                     .header("accept", "*/*")
+                    .header("User-Agent", "Foodsharing-Android-App/1.0")
 
                 if (!isLogin) {
                     val csrfToken = sessionManager.getCsrfToken()
@@ -88,6 +93,10 @@ object ApiClient {
 
                 val response = chain.proceed(builder.build())
 
+                response.header("X-CSRF-Token")?.let { token ->
+                    sessionManager.saveCsrfToken(token)
+                }
+
                 if (response.code == 403) {
                     sessionManager.clearSession()
                     AuthEventBus.emitSessionExpired()
@@ -95,9 +104,15 @@ object ApiClient {
 
                 response
             }
-            .addInterceptor(loggingInterceptor) // Log after all headers are added
+            .addInterceptor(loggingInterceptor)
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
+            .build()
+    }
+
+    private fun buildApi(client: OkHttpClient): FoodsharingApi {
+        val moshi = Moshi.Builder()
+            .addLast(KotlinJsonAdapterFactory())
             .build()
 
         return Retrofit.Builder()

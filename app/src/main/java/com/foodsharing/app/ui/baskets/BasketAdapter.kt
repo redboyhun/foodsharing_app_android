@@ -17,9 +17,12 @@ class BasketAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(basket: Basket) {
-            binding.tvDescription.text = basket.description.take(80)
-            binding.tvCreator.text = basket.creator?.name ?: ""
-            binding.tvDistance.text = basket.distance?.let { "%.1f km".format(it) } ?: ""
+            binding.tvDescription.text = basket.description
+            binding.tvCreator.text = basket.creator?.name ?: "Anonymous"
+            binding.tvDistance.text = basket.distance?.let { "%.1f km".format(it) } ?: "Unknown distance"
+
+            // Note: In a real app, we would load the actual user avatar here
+            // binding.ivAvatar.load(basket.creator?.avatarUrl)
 
             binding.root.setOnClickListener { onItemClick(basket) }
             onLongClick?.let { listener ->

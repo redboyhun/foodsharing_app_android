@@ -85,13 +85,14 @@ interface FoodsharingApi {
     @POST("api/stores/{storeId}/pickups/{pickupDate}/users/current")
     suspend fun joinPickup(
         @Path("storeId") storeId: Int,
-        @Path("pickupDate") pickupDate: String
+        @Path("pickupDate") pickupDate: String //pickup date should be UTC like 2026-06-16T08:00:00.000Z
     ): Response<Unit>
 
-    @DELETE("api/stores/{storeId}/pickups/{pickupDate}/users/current")
+    @DELETE("api/stores/{storeId}/pickups/{pickupDate}/users/{userId}")
     suspend fun leavePickup(
         @Path("storeId") storeId: Int,
-        @Path("pickupDate") pickupDate: String
+        @Path("pickupDate") pickupDate: String,
+        @Path("userId") userId: Int
     ): Response<Unit>
 
     // Stores

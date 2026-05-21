@@ -6,35 +6,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.foodsharing.app.data.model.Conversation
-import com.foodsharing.app.data.model.Profile
 import com.foodsharing.app.databinding.ItemConversationBinding
 import com.foodsharing.app.util.formatMessageTime
+
+/**
+ * UI model representing a conversation with its resolved display title.
+ */
+data class ConversationUiModel(
+    val conversation: Conversation,
+    val displayTitle: String
+)
 
 class ConversationsAdapter(
     private val currentUserId: Int,
     private val onClick: (Conversation) -> Unit
-) : ListAdapter<Conversation, ConversationsAdapter.ViewHolder>(DiffCallback()) {
-
-    private var profiles: List<Profile> = emptyList()
-
-    fun setProfiles(profiles: List<Profile>) {
-        this.profiles = profiles
-        notifyDataSetChanged()
-    }
+) : ListAdapter<ConversationUiModel, ConversationsAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(private val binding: ItemConversationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(conversation: Conversation) {
-            // Title hierarchy: "title" then "username where userid not eq logged-in userid" then "Conversation"
-            var title = conversation.title
+        fun bind(uiModel: ConversationUiModel) {
+            val conversation = uiModel.conversation
             
-            if (title.isNullOrBlank()) {
-                val otherMemberId = conversation.members?.find { it != currentUserId }
-                title = profiles.find { it.id == otherMemberId }?.name
-            }
-            
-            binding.tvName.text = if (!title.isNullOrBlank()) title else "Conversation"
+            binding.tvName.text = uiModel.displayTitle
             binding.tvLastMessage.text = conversation.lastMessage?.body?.take(60) ?: ""
             binding.tvTimestamp.text = formatMessageTime(conversation.lastMessage?.sentAt)
             binding.unreadIndicator.visibility =
@@ -50,8 +44,11 @@ class ConversationsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position))
 
-    class DiffCallback : DiffUtil.ItemCallback<Conversation>() {
-        override fun areItemsTheSame(old: Conversation, new: Conversation) = old.id == new.id
-        override fun areContentsTheSame(old: Conversation, new: Conversation) = old == new
+    class DiffCallback : DiffUtil.ItemCallback<ConversationUiModel>() {
+        override fun areItemsTheSame(old: ConversationUiModel, new: ConversationUiModel) = 
+            old.conversation.id == new.conversation.id
+            
+        override fun areContentsTheSame(old: ConversationUiModel, new: ConversationUiModel) = 
+            old == new
     }
 }

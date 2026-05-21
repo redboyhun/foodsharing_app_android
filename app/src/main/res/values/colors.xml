@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2e7d32</color>
-    <color name="colorPrimaryVariant">#1b5e20</color>
-    <color name="colorOnPrimary">#ffffff</color>
-    <color name="colorSecondary">#ff6f00</color>
-    <color name="colorOnSecondary">#000000</color>
-    <color name="colorBackground">#ffffff</color>
-    <color name="colorSurface">#ffffff</color>
-    <color name="colorError">#b00020</color>
+    <!-- Primary Colors -->
+    <color name="primary">#2D5A27</color> <!-- Forest Green -->
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#2d5a27</color>
+    <color name="on_primary_container">#9dd090</color>
+
+    <!-- Secondary Colors -->
+    <color name="secondary">#2c6956</color>
+    <color name="on_secondary">#ffffff</color>
+    <color name="secondary_container">#aeedd5</color>
+    <color name="on_secondary_container">#316d5b</color>
+
+    <!-- Tertiary Colors -->
+    <color name="tertiary">#383a37</color>
+    <color name="on_tertiary">#ffffff</color>
+
+    <!-- Background & Surface -->
+    <color name="background">#fbf9f8</color>
+    <color name="on_background">#1b1c1c</color>
+    <color name="surface_warm">#FAFAF5</color>
+    <color name="surface_pure">#FFFFFF</color>
+    <color name="surface_variant">#e4e2e2</color>
+    <color name="on_surface">#1b1c1c</color>
+    <color name="on_surface_variant">#42493e</color>
+
+    <!-- Accents -->
+    <color name="mint_accent">#A8E6CF</color>
+    <color name="error">#ba1a1a</color>
+    <color name="on_error">#ffffff</color>
+
+    <!-- Legacy / Compatibility (Mapped to new system) -->
+    <color name="colorPrimary">@color/primary</color>
+    <color name="colorPrimaryVariant">#23501e</color>
+    <color name="colorOnPrimary">@color/on_primary</color>
+    <color name="colorSecondary">@color/secondary</color>
+    <color name="colorOnSecondary">@color/on_secondary</color>
+    <color name="colorBackground">@color/background</color>
+    <color name="colorSurface">@color/surface_pure</color>
+    <color name="colorError">@color/error</color>
+    <color name="text_muted">#808080</color>
 </resources>

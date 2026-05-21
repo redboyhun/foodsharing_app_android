@@ -7,10 +7,19 @@ import android.graphics.Paint
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.graphics.createBitmap
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.foodsharing.app.data.api.ApiClient
+import com.google.android.material.imageview.ShapeableImageView
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 fun View.visible() { visibility = View.VISIBLE }
 fun View.gone() { visibility = View.GONE }
@@ -45,33 +54,80 @@ fun formatMessageTime(iso: String?): String {
     }
 }
 
+fun formatPickupDate(isoDate: String): String {
+    return try {
+        val odt = OffsetDateTime.parse(isoDate)
+        odt.atZoneSameInstant(ZoneId.systemDefault())
+            .format(DateTimeFormatter.ofPattern("EEEE, yyyy-MM-dd HH:mm", Locale.getDefault()))
+    } catch (e: Exception) {
+        isoDate.take(16).replace("T", " ")
+    }
+}
+
+fun toUtcIsoString(isoDate: String): String {
+    return try {
+        val odt = OffsetDateTime.parse(isoDate)
+        odt.withOffsetSameInstant(ZoneOffset.UTC)
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))
+    } catch (e: Exception) {
+        isoDate
+    }
+}
+
 private val AVATAR_COLORS = listOf(
     0xFF1976D2.toInt(), 0xFF388E3C.toInt(), 0xFFD32F2F.toInt(),
     0xFF7B1FA2.toInt(), 0xFF0288D1.toInt(), 0xFF5D4037.toInt()
 )
 
-fun ImageView.loadAvatarWithFallback(url: String?, name: String, baseUrl: String = "") {
-    val fullUrl = when {
-        url.isNullOrEmpty() -> null
-        url.startsWith("/") -> baseUrl.removeSuffix("/") + url
-        else -> url
-    }
-    if (fullUrl != null) {
-        Glide.with(context).load(fullUrl).circleCrop().into(this)
-    } else {
-        val initial = name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
-        val color = AVATAR_COLORS[(name.hashCode() and Int.MAX_VALUE) % AVATAR_COLORS.size]
-        val size = 96
-        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        paint.color = color
-        canvas.drawCircle(size / 2f, size / 2f, size / 2f, paint)
-        paint.color = Color.WHITE
-        paint.textSize = size * 0.45f
-        paint.textAlign = Paint.Align.CENTER
-        canvas.drawText(initial, size / 2f, size / 2f - (paint.descent() + paint.ascent()) / 2f, paint)
-        setImageBitmap(bitmap)
-    }
+fun createInitialsBitmap(name: String, size: Int = 256): Bitmap {
+    val initial = name.trim().firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+    val color = AVATAR_COLORS[(name.hashCode() and Int.MAX_VALUE) % AVATAR_COLORS.size]
+
+    // Change this line:
+    val bitmap = createBitmap(size, size, Bitmap.Config.ARGB_8888)
+
+    val canvas = Canvas(bitmap)
+    val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    paint.color = color
+    canvas.drawCircle(size / 2f, size / 2f, size / 2f, paint)
+    paint.color = Color.WHITE
+    paint.textSize = size * 0.45f
+    paint.textAlign = Paint.Align.CENTER
+    canvas.drawText(initial, size / 2f, size / 2f - (paint.descent() + paint.ascent()) / 2f, paint)
+    return bitmap
 }
 
+fun ImageView.loadAvatarWithFallback(url: String?, name: String, baseUrl: String = ApiClient.baseUrl) {
+    val fullUrl = when {
+        url.isNullOrEmpty() -> null
+        url.startsWith("/") -> {
+            val base = if (baseUrl.startsWith("http")) baseUrl else "https://$baseUrl"
+            base.removeSuffix("/") + url
+        }
+        else -> url
+    }
+    
+    val fallback = createInitialsBitmap(name).toDrawable(resources)
+    
+    if (fullUrl != null) {
+        // Reset properties that might interfere with showing a loaded photo
+        imageTintList = null
+        colorFilter = null
+        background = null
+        setPadding(0, 0, 0, 0)
+        
+        if (this is ShapeableImageView) {
+            strokeWidth = 0f
+        }
+        
+        Glide.with(context)
+            .load(fullUrl)
+            .circleCrop()
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .placeholder(fallback)
+            .error(fallback)
+            .into(this)
+    } else {
+        setImageDrawable(fallback)
+    }
+}

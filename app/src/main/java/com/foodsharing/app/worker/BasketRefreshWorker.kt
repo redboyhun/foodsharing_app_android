@@ -3,6 +3,7 @@ package com.foodsharing.app.worker
 import android.content.Context
 import android.location.Location
 import android.location.LocationManager
+import androidx.core.content.edit
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.foodsharing.app.data.api.ApiClient
@@ -39,8 +40,8 @@ class BasketRefreshWorker(
                 null
             }
 
-            val lat = location?.latitude ?: return Result.success()
-            val lon = location?.longitude ?: return Result.success()
+            location?.latitude ?: return Result.success()
+            location?.longitude ?: return Result.success()
 
 //            val response = ApiClient.api.getNearbyBaskets(lat, lon, 3)
             val response = ApiClient.api.getNearbyBaskets(3)
@@ -70,7 +71,9 @@ class BasketRefreshWorker(
                         val toRemove = updatedIds.take(updatedIds.size - 500)
                         updatedIds.removeAll(toRemove.toSet())
                     }
-                    prefs.edit().putStringSet("known_basket_ids", updatedIds).apply()
+                    prefs.edit {
+                        putStringSet("known_basket_ids", updatedIds)
+                    }
                 }
             }
             Result.success()

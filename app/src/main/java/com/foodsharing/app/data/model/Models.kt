@@ -92,7 +92,7 @@ data class Basket(
     @Json(name = "requestCount") val requestCount: Int? = null,
     val creator: BasketCreator? = null,
     val until: String? = null,
-    val distance: Double? = null
+    @Json(name = "distanceInKm") val distance: Double? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -222,4 +222,3 @@ data class StoreInfo(
 data class OptionalMessage(
     val message: String? = null
 )
-

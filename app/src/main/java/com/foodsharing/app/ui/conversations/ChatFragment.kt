@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.foodsharing.app.databinding.FragmentChatBinding
 import com.foodsharing.app.util.*
 import com.foodsharing.app.util.Resource
@@ -35,6 +38,11 @@ class ChatFragment : Fragment() {
         adapter = ChatAdapter(sessionManager.getUserId())
         binding.recyclerView.adapter = adapter
 
+        // Setup toolbar with back button support
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
         binding.btnSend.setOnClickListener {
             val body = binding.etMessage.text.toString().trim()
             if (body.isEmpty()) return@setOnClickListener
@@ -51,18 +59,25 @@ class ChatFragment : Fragment() {
                     val messages = conversation.messages?.sortedBy { it.sentAt } ?: emptyList()
                     val profiles = state.data.profiles ?: emptyList()
                     
-                    adapter.setProfiles(profiles)
-                    adapter.submitList(messages)
+                    val uiModels = messages.map { message ->
+                        ChatMessageUiModel(
+                            message = message,
+                            authorName = profiles.find { it.id == message.authorId }?.name
+                        )
+                    }
+                    adapter.submitList(uiModels)
                     
                     if (messages.isNotEmpty()) {
                         binding.recyclerView.scrollToPosition(messages.size - 1)
                     }
                     
-                    // Set title
+                    // Set dynamic title on the local toolbar
                     val otherParticipant = profiles.find { 
                         it.id != sessionManager.getUserId() && conversation.members?.contains(it.id) == true 
                     }
-                    requireActivity().title = conversation.title ?: otherParticipant?.name ?: "Chat"
+                    
+                    val title = conversation.title ?: otherParticipant?.name ?: "Chat"
+                    binding.toolbar.title = title
                 }
                 is Resource.Error -> {
                     binding.progressBar.gone()

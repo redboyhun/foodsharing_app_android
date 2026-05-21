@@ -1,6 +1,7 @@
 package com.foodsharing.app.ui.baskets
 
 import android.app.Dialog
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.foodsharing.app.R
 import com.foodsharing.app.data.api.ApiClient
 import com.foodsharing.app.databinding.FragmentBasketDetailBinding
@@ -59,9 +64,40 @@ class BasketDetailFragment : Fragment() {
                     }
 
                     if (imageUrl != null) {
-                        Glide.with(this).load(imageUrl).into(binding.ivBasketPicture)
+                        Glide.with(this)
+                            .load(imageUrl)
+                            .placeholder(R.drawable.ic_basket)
+                            .error(R.drawable.ic_basket)
+                            .listener(object : RequestListener<Drawable> {
+                                override fun onLoadFailed(
+                                    e: GlideException?,
+                                    model: Any?,
+                                    target: Target<Drawable>,
+                                    isFirstResource: Boolean
+                                ): Boolean {
+                                    binding.ivBasketPicture.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                                    binding.ivBasketPicture.alpha = 0.5f
+                                    return false
+                                }
+
+                                override fun onResourceReady(
+                                    resource: Drawable,
+                                    model: Any,
+                                    target: Target<Drawable>?,
+                                    dataSource: DataSource,
+                                    isFirstResource: Boolean
+                                ): Boolean {
+                                    binding.ivBasketPicture.scaleType = ImageView.ScaleType.CENTER_CROP
+                                    binding.ivBasketPicture.alpha = 1.0f
+                                    return false
+                                }
+                            })
+                            .into(binding.ivBasketPicture)
                         binding.ivBasketPicture.setOnClickListener { showFullScreenImage(imageUrl) }
                     } else {
+                        binding.ivBasketPicture.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                        binding.ivBasketPicture.setImageResource(R.drawable.ic_basket)
+                        binding.ivBasketPicture.alpha = 0.5f
                         binding.ivBasketPicture.setOnClickListener(null)
                     }
 

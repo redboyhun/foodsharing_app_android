@@ -31,8 +31,9 @@ class ConversationsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sessionManager = SessionManager(requireContext())
+        val currentUserId = sessionManager.getUserId()
 
-        adapter = ConversationsAdapter(sessionManager.getUserId()) { conversation ->
+        adapter = ConversationsAdapter(currentUserId) { conversation ->
             val action = ConversationsFragmentDirections.actionConversationsToChat(conversation.id)
             findNavController().navigate(action)
         }
@@ -46,9 +47,23 @@ class ConversationsFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBar.gone()
                     val conversations = state.data.conversations
+                    val profiles = state.data.profiles ?: emptyList()
+                    
                     binding.emptyView.visibility = if (conversations.isEmpty()) View.VISIBLE else View.GONE
-                    adapter.setProfiles(state.data.profiles ?: emptyList())
-                    adapter.submitList(conversations)
+                    
+                    // Map data to UI models for efficient DiffUtil calculation
+                    val uiModels = conversations.map { conversation ->
+                        var title = conversation.title
+                        if (title.isNullOrBlank()) {
+                            val otherMemberId = conversation.members?.find { it != currentUserId }
+                            title = profiles.find { it.id == otherMemberId }?.name
+                        }
+                        ConversationUiModel(
+                            conversation = conversation,
+                            displayTitle = title ?: "Conversation"
+                        )
+                    }
+                    adapter.submitList(uiModels)
                 }
                 is Resource.Error -> {
                     binding.progressBar.gone()

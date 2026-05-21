@@ -2,44 +2,71 @@ package com.foodsharing.app.ui.conversations
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.foodsharing.app.R
 import com.foodsharing.app.data.model.Message
-import com.foodsharing.app.data.model.Profile
 import com.foodsharing.app.databinding.ItemChatMessageBinding
 import com.foodsharing.app.util.formatMessageTime
 
+/**
+ * UI model representing a chat message with its author's name already resolved.
+ * This avoids calling notifyDataSetChanged() when profile information is updated separately.
+ */
+data class ChatMessageUiModel(
+    val message: Message,
+    val authorName: String?
+)
+
 class ChatAdapter(
     private val currentUserId: Int
-) : ListAdapter<Message, ChatAdapter.ViewHolder>(DiffCallback()) {
-
-    private var profiles: List<Profile> = emptyList()
-
-    fun setProfiles(profiles: List<Profile>) {
-        this.profiles = profiles
-        notifyDataSetChanged()
-    }
+) : ListAdapter<ChatMessageUiModel, ChatAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(private val binding: ItemChatMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(message: Message) {
-            val author = profiles.find { it.id == message.authorId }
-            binding.tvAuthor.text = author?.name ?: "Unknown"
+        fun bind(uiModel: ChatMessageUiModel) {
+            val message = uiModel.message
+            val isMe = message.authorId == currentUserId
+            
+            binding.tvAuthor.text = uiModel.authorName ?: "Unknown"
             binding.tvBody.text = message.body
             binding.tvTime.text = formatMessageTime(message.sentAt)
             
-            // Basic alignment based on author
-            val params = binding.root.layoutParams as? ViewGroup.MarginLayoutParams
-            if (message.authorId == currentUserId) {
-                params?.marginStart = 100
-                params?.marginEnd = 0
+            val params = binding.cardMessage.layoutParams as ConstraintLayout.LayoutParams
+            if (isMe) {
+                params.horizontalBias = 1.0f
+                binding.cardMessage.setCardBackgroundColor(
+                    ContextCompat.getColor(binding.root.context, R.color.primary_container)
+                )
+                binding.tvAuthor.setTextColor(
+                    ContextCompat.getColor(binding.root.context, R.color.on_primary_container)
+                )
+                binding.tvBody.setTextColor(
+                    ContextCompat.getColor(binding.root.context, R.color.on_primary_container)
+                )
+                binding.tvTime.setTextColor(
+                    ContextCompat.getColor(binding.root.context, R.color.on_primary_container)
+                )
             } else {
-                params?.marginStart = 0
-                params?.marginEnd = 100
+                params.horizontalBias = 0.0f
+                binding.cardMessage.setCardBackgroundColor(
+                    ContextCompat.getColor(binding.root.context, R.color.surface_pure)
+                )
+                binding.tvAuthor.setTextColor(
+                    ContextCompat.getColor(binding.root.context, R.color.primary)
+                )
+                binding.tvBody.setTextColor(
+                    ContextCompat.getColor(binding.root.context, R.color.on_surface)
+                )
+                binding.tvTime.setTextColor(
+                    ContextCompat.getColor(binding.root.context, R.color.text_muted)
+                )
             }
-            binding.root.layoutParams = params
+            binding.cardMessage.layoutParams = params
         }
     }
 
@@ -50,8 +77,11 @@ class ChatAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position))
 
-    class DiffCallback : DiffUtil.ItemCallback<Message>() {
-        override fun areItemsTheSame(old: Message, new: Message) = old.id == new.id
-        override fun areContentsTheSame(old: Message, new: Message) = old == new
+    class DiffCallback : DiffUtil.ItemCallback<ChatMessageUiModel>() {
+        override fun areItemsTheSame(old: ChatMessageUiModel, new: ChatMessageUiModel) = 
+            old.message.id == new.message.id
+
+        override fun areContentsTheSame(old: ChatMessageUiModel, new: ChatMessageUiModel) = 
+            old == new
     }
 }

@@ -1,10 +1,14 @@
 package com.foodsharing.app.util
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.foodsharing.app.R
@@ -55,20 +59,23 @@ object NotificationHelper {
         nm.createNotificationChannel(
             NotificationChannel(
                 CHANNEL_AUTH,
-                "Account",
+                context.getString(R.string.notif_channel_auth),
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
-                description = "Sign-in and session alerts"
+                description = context.getString(R.string.notif_channel_auth_desc)
             }
         )
     }
 
+    @SuppressLint("MissingPermission")
     fun showNewMessageNotification(
         context: Context,
         conversationName: String,
         notifId: Int,
         messagePreview: String? = null
     ) {
+        if (!hasNotificationPermission(context)) return
+
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra("navigate_to", "conversations")
@@ -82,6 +89,7 @@ object NotificationHelper {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pi)
             .setAutoCancel(true)
+        
         if (messagePreview != null) {
             builder.setContentText(messagePreview)
         } else {
@@ -91,7 +99,10 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(notifId, builder.build())
     }
 
+    @SuppressLint("MissingPermission")
     fun showNearbyBasketNotification(context: Context, description: String, notifId: Int) {
+        if (!hasNotificationPermission(context)) return
+
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra("navigate_to", "baskets")
@@ -111,7 +122,10 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(notifId, notif)
     }
 
+    @SuppressLint("MissingPermission")
     fun showSessionExpiredNotification(context: Context) {
+        if (!hasNotificationPermission(context)) return
+
         val intent = Intent(context, LoginActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra("session_expired", true)
@@ -122,8 +136,8 @@ object NotificationHelper {
         )
         val notif = NotificationCompat.Builder(context, CHANNEL_AUTH)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle("Session expired")
-            .setContentText("Tap to sign in again.")
+            .setContentTitle(context.getString(R.string.notif_session_expired))
+            .setContentText(context.getString(R.string.notif_session_expired_desc))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pi)
             .setAutoCancel(true)
@@ -132,7 +146,10 @@ object NotificationHelper {
         NotificationManagerCompat.from(context).notify(NOTIF_ID_SESSION_EXPIRED, notif)
     }
 
+    @SuppressLint("MissingPermission")
     fun showPickupReminderNotification(context: Context, storeName: String, timeLabel: String, notifId: Int) {
+        if (!hasNotificationPermission(context)) return
+
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra("navigate_to", "pickups")
@@ -150,5 +167,12 @@ object NotificationHelper {
             .build()
 
         NotificationManagerCompat.from(context).notify(notifId, notif)
+    }
+
+    private fun hasNotificationPermission(context: Context): Boolean {
+        return ActivityCompat.checkSelfPermission(
+            context,
+            Manifest.permission.POST_NOTIFICATIONS
+        ) == PackageManager.PERMISSION_GRANTED
     }
 }

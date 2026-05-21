@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.foodsharing.app.databinding.FragmentPickupsBinding
 import com.foodsharing.app.util.Resource
+import com.foodsharing.app.util.SessionManager
 import com.foodsharing.app.util.gone
 import com.foodsharing.app.util.toast
 import com.foodsharing.app.util.visible
@@ -28,12 +29,15 @@ class PickupsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        optionsAdapter = PickupOptionsAdapter { option ->
+        val sessionManager = SessionManager(requireContext())
+        val currentUserId = sessionManager.getUserId()
+
+        optionsAdapter = PickupOptionsAdapter(currentUserId) { option ->
             viewModel.joinPickup(option.store.id, option.date)
         }
         binding.rvOptions.adapter = optionsAdapter
 
-        registeredAdapter = RegisteredPickupsAdapter { pickup ->
+        registeredAdapter = RegisteredPickupsAdapter(currentUserId) { pickup ->
             viewModel.leavePickup(pickup.store.id, pickup.date)
         }
         binding.rvRegistered.adapter = registeredAdapter

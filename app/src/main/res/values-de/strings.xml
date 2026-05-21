@@ -10,6 +10,8 @@
     <string name="basket_detail">Essenskorb</string>
     <string name="add_basket">Neue Essenskorb</string>
     <string name="basket_description">Beschreibung</string>
+    <string name="basket_lifetime">Gültigkeit (Tagen)</string>
+    <string name="basket_weight">Gewicht (Gramm)</string>
     <string name="request_basket">Essenskorb anfragen</string>
     <string name="request_message_hint">Schreibe eine Nachricht an den Anbieter</string>
     <string name="error_message_required">Nachricht ist erforderlich</string>
@@ -17,6 +19,7 @@
     <string name="no_baskets_nearby">Keine Essenskörbe in der Nähe</string>
     <string name="no_baskets">Noch keine Essenskörbe</string>
     <string name="conversations">Nachrichten</string>
+    <string name="messages">Nachrichten</string>
     <string name="type_message">Schreibe eine Nachricht...</string>
     <string name="send">Senden</string>
     <string name="no_conversations">Keine Unterhaltungen</string>
@@ -25,6 +28,10 @@
     <string name="available_pickups">Verfügbare Termine</string>
     <string name="join">Beitreten</string>
     <string name="leave">Verlassen</string>
+    <string name="pickup_store_unconfirmed">%1$s ⏳</string>
+    <string name="pickup_slots_format">%1$d/%2$d Plätze</string>
+    <string name="profile">Profil</string>
+    <string name="about_me">Über mich</string>
     <string name="settings">Einstellungen</string>
     <string name="settings_saved">Einstellungen gespeichert</string>
     <string name="refresh_interval">Aktualisierungsintervall</string>
@@ -41,7 +48,11 @@
     <string name="notif_channel_baskets_desc">Benachrichtigungen neuer Essenskörbe</string>
     <string name="notif_channel_pickups">Abholungserinnerungen</string>
     <string name="notif_channel_pickups_desc">Zukünftige Abholungserinnerungen</string>
+    <string name="notif_channel_auth">Konto</string>
+    <string name="notif_channel_auth_desc">Anmelde- und Sitzungsbenachrichtigungen</string>
     <string name="notif_new_message">Neue Nachrichten</string>
     <string name="notif_new_basket">Neue Essenskörbe in der Nähe</string>
     <string name="notif_pickup_reminder">Zukünftige Abholungen</string>
+    <string name="notif_session_expired">Session abgelaufen</string>
+    <string name="notif_session_expired_desc">Wieder anmelden</string>
 </resources>

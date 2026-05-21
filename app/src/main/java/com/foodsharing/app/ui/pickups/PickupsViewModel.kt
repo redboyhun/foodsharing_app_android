@@ -28,7 +28,18 @@ class PickupsViewModel(application: Application) : AndroidViewModel(application)
     fun loadPickupOptions() {
         viewModelScope.launch {
             _options.value = Resource.Loading
-            _options.value = repository.getPickupOptions()
+            val result = repository.getPickupOptions()
+            if (result is Resource.Success) {
+                val userId = sessionManager.getUserId()
+                val filtered = result.data.filter { option ->
+                    val isFull = option.occupiedSlots.size >= option.slots
+                    val isJoined = option.occupiedSlots.any { it.id == userId }
+                    !isFull && !isJoined
+                }
+                _options.value = Resource.Success(filtered)
+            } else {
+                _options.value = result
+            }
         }
     }
 
@@ -54,7 +65,8 @@ class PickupsViewModel(application: Application) : AndroidViewModel(application)
     fun leavePickup(storeId: Int, pickupDate: String) {
         viewModelScope.launch {
             _joinState.value = Resource.Loading
-            val result = repository.leavePickup(storeId, pickupDate)
+            val userId = sessionManager.getUserId()
+            val result = repository.leavePickup(storeId, pickupDate, userId)
             _joinState.value = result
             if (result is Resource.Success) {
                 loadPickupOptions()

@@ -17,6 +17,7 @@
     <string name="add_basket">Add Basket</string>
     <string name="basket_description">Description</string>
     <string name="basket_lifetime">Lifetime (days)</string>
+    <string name="default_basket_lifetime" translatable="false">7</string>
     <string name="basket_weight">Weight (grams)</string>
     <string name="request_basket">Request this basket</string>
     <string name="request_message_hint">Enter a message for the owner</string>
@@ -26,6 +27,7 @@
     <string name="no_baskets">You have no baskets yet</string>
 
     <string name="conversations">Messages</string>
+    <string name="messages">Messages</string>
     <string name="chat" translatable="false">Chat</string>
     <string name="type_message">Type a message…</string>
     <string name="send">Send</string>
@@ -36,8 +38,11 @@
     <string name="available_pickups">Available Slots</string>
     <string name="join">Join</string>
     <string name="leave">Leave</string>
+    <string name="pickup_store_unconfirmed">%1$s ⏳</string>
+    <string name="pickup_slots_format">%1$d/%2$d slots</string>
 
-    <string name="profile" translatable="false">Profile</string>
+    <string name="profile">Profile</string>
+    <string name="about_me">About Me</string>
     <string name="settings">Settings</string>
     <string name="settings_saved">Settings saved</string>
     <string name="refresh_interval">Background refresh interval</string>
@@ -56,9 +61,13 @@
     <string name="notif_channel_baskets_desc">Notifications for new food baskets near you</string>
     <string name="notif_channel_pickups">Pickup Reminders</string>
     <string name="notif_channel_pickups_desc">Reminders for upcoming pickups</string>
+    <string name="notif_channel_auth">Account</string>
+    <string name="notif_channel_auth_desc">Sign-in and session alerts</string>
 
     <!-- Notification content -->
     <string name="notif_new_message">New message</string>
     <string name="notif_new_basket">New basket nearby</string>
     <string name="notif_pickup_reminder">Upcoming pickup</string>
+    <string name="notif_session_expired">Session expired</string>
+    <string name="notif_session_expired_desc">Tap to sign in again.</string>
 </resources>

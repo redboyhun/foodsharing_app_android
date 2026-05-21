@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.foodsharing.app.R
 import com.foodsharing.app.data.model.PickupOption
 import com.foodsharing.app.databinding.ItemPickupOptionBinding
+import com.foodsharing.app.util.formatPickupDate
 
 class PickupOptionsAdapter(
+    private val currentUserId: Int,
     private val onJoinClick: (PickupOption) -> Unit
 ) : ListAdapter<PickupOption, PickupOptionsAdapter.ViewHolder>(DiffCallback()) {
 
@@ -16,10 +19,24 @@ class PickupOptionsAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(option: PickupOption) {
-            binding.tvStoreName.text = option.store.name
-            binding.tvDate.text = option.date.take(16).replace("T", " ")
-            binding.tvSlots.text = "${option.occupiedSlots.size}/${option.slots} slots"
-            binding.btnJoin.isEnabled = option.occupiedSlots.size < option.slots
+            val context = binding.root.context
+            val isMySlotUnconfirmed = option.occupiedSlots.any { it.id == currentUserId } && option.isConfirmed == false
+            
+            binding.tvStoreName.text = if (isMySlotUnconfirmed) {
+                context.getString(R.string.pickup_store_unconfirmed, option.store.name)
+            } else {
+                option.store.name
+            }
+            
+            binding.tvDate.text = formatPickupDate(option.date)
+            
+            binding.tvSlots.text = context.getString(
+                R.string.pickup_slots_format,
+                option.occupiedSlots.size,
+                option.slots
+            )
+
+            binding.btnJoin.isEnabled = option.occupiedSlots.size < option.slots && option.occupiedSlots.none { it.id == currentUserId }
             binding.btnJoin.setOnClickListener { onJoinClick(option) }
         }
     }

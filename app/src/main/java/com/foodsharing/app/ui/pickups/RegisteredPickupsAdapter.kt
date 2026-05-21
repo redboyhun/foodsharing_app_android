@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.foodsharing.app.data.model.PickupOption
 import com.foodsharing.app.databinding.ItemRegisteredPickupBinding
+import com.foodsharing.app.util.formatPickupDate
 
 class RegisteredPickupsAdapter(
+    private val currentUserId: Int,
     private val onLeaveClick: (PickupOption) -> Unit
 ) : ListAdapter<PickupOption, RegisteredPickupsAdapter.ViewHolder>(DiffCallback()) {
 
@@ -16,8 +18,9 @@ class RegisteredPickupsAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(pickup: PickupOption) {
-            binding.tvStoreName.text = pickup.store.name
-            binding.tvDate.text = pickup.date.take(16).replace("T", " ")
+            val isMySlotUnconfirmed = pickup.occupiedSlots.any { it.id == currentUserId } && pickup.isConfirmed == false
+            binding.tvStoreName.text = if (isMySlotUnconfirmed) "${pickup.store.name} ⏳" else pickup.store.name
+            binding.tvDate.text = formatPickupDate(pickup.date)
             binding.btnLeave.setOnClickListener { onLeaveClick(pickup) }
         }
     }
