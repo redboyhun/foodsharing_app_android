@@ -38,3 +38,6 @@ signing.properties
 
 # ===== Google Services (decide by policy) =====
 # google-services.json
+
+# AI
+.claude/

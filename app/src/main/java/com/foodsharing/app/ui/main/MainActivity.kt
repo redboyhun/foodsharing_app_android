@@ -11,18 +11,21 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.foodsharing.app.R
 import com.foodsharing.app.databinding.ActivityMainBinding
 import com.foodsharing.app.ui.auth.LoginActivity
 import com.foodsharing.app.util.AuthEventBus
+import com.foodsharing.app.util.NotificationHelper
+import com.foodsharing.app.util.SessionManager
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var sessionManager: SessionManager
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -35,22 +38,49 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sessionManager = SessionManager(this)
+
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        binding.bottomNav.setupWithNavController(navController)
+        // Sync bottom nav indicator for top-level destinations; do NOT use
+        // setupWithNavController — it enables save/restoreState (Nav 2.4+) which
+        // re-opens deep sub-fragments instead of the section root on tab tap.
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val topLevelIds = setOf(
+                R.id.nearbyBasketsFragment,
+                R.id.conversationsFragment,
+                R.id.pickupsFragment,
+                R.id.profileFragment
+            )
+            if (destination.id in topLevelIds) {
+                binding.bottomNav.selectedItemId = destination.id
+            }
+        }
+
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            if (navController.currentDestination?.id != item.itemId) {
+                navController.navigate(
+                    item.itemId,
+                    null,
+                    NavOptions.Builder()
+                        .setPopUpTo(R.id.nearbyBasketsFragment, inclusive = false, saveState = false)
+                        .setLaunchSingleTop(true)
+                        .setRestoreState(false)
+                        .build()
+                )
+            }
+            true
+        }
+
+        binding.bottomNav.setOnItemReselectedListener { /* stay on current root */ }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 AuthEventBus.sessionExpired.collect {
-                    startActivity(
-                        Intent(this@MainActivity, LoginActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            putExtra("session_expired", true)
-                        }
-                    )
-                    finish()
+                    NotificationHelper.showSessionExpiredNotification(this@MainActivity)
+                    redirectToLogin()
                 }
             }
         }
@@ -65,6 +95,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkNotificationPermission()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!sessionManager.isLoggedIn()) {
+            NotificationHelper.showSessionExpiredNotification(this)
+            redirectToLogin()
+        }
+    }
+
+    private fun redirectToLogin() {
+        startActivity(
+            Intent(this, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                putExtra("session_expired", true)
+            }
+        )
+        finish()
     }
 
     private fun checkNotificationPermission() {
